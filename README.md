@@ -12,6 +12,8 @@ This is a project inspired by Coursera's [Web Application Development with Javas
 
 Adapt the templates and helper functions so that the messaging window displays users’ avatars next to their messages. Feel free to add other enhancements!
 
+- Thank the heavens for [`object-fit: cover`](https://medium.com/@chrisnager/center-and-crop-images-with-a-single-line-of-css-ad140d5b4a87#.ik0qr64az) in CSS to center and crop images!
+
 ### Task 2: Implement data writing security
 
 Remove the insecure package from the application and implement a Meteor method to allow the insertion of chat items in the Chats collection. Test that you cannot insert items directly any more.

@@ -1,5 +1,6 @@
 <head>
   <title>minstant</title>
+  <link href='https://fonts.googleapis.com/css?family=Lobster+Two:700' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -19,11 +20,11 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand minstant_brand" href="/">
         Minstant!
       </a>
     </div>
-    <div class="nav navbar-nav">
+    <div class="nav navbar-nav navbar-right">
     {{> loginButtons}}
 </div>
   </div>
@@ -65,25 +66,30 @@
 	</div>
 </template>
 
-
 <!-- Top level template for the chat page -->
 <template name="chat_page">
-	<h2>Type in the box below to send a message!</h2>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="well well-lg chat_window">
-			{{#each messages}}
-				{{> chat_message}}
-			{{/each}}
+	<div class="chat_page">
+		<h2 class="chat_page-heading">Chit-Chat</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="well well-lg chat_page-chat_window">
+				{{#each messages}}
+					{{> chat_message}}
+				{{/each}}
+				</div>
 			</div>
 		</div>
-	</div>
-    <div class="row">
-		<div class="col-md-12">
-			<form class="js-send-chat">
-			<input class="input" type="text" name="chat" placeholder="type a message here...">
-			<button class="btn btn-default">send</button>
-		</form>
+	  <div class="row chat_page-typer">
+			<div class="col-md-12">
+				<form class="js-send-chat input-group">
+				<input class="input form-control" type="text" name="chat" placeholder="Type a message...">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+					</button>
+		    </span>
+			</form>
+			</div>
 		</div>
 	</div>
 </template>
@@ -91,16 +97,30 @@
 <!-- simple template that displays a message -->
 <template name="chat_message">
 	{{#if isOtherUser user}}
-		<div class="well well-sm chat_message-well other_message">
-			<img src="/{{getAvatar user}}" class="chat_message-avatar_img">
-			{{getUsername user}}: {{text}}
-			<br>
+		<div class="media chat_message_row">
+		  <div class="media-left media-middle">
+	      <img class="media-object chat_message-avatar_img" src="/{{getAvatar user}}" alt="avatar picture">
+		  </div>
+		  <div class="media-body">
+		    <h6 class="media-heading other_heading">{{getUsername user}}</h6>
+		    	<div class="well well-sm chat_message-well other_message">
+						{{text}}
+						<br>
+					</div>
+		  </div>
 		</div>
  	{{else}}
-		<div class="well well-sm chat_message-well my_message">
-			<img src="/{{getAvatar user}}" class="chat_message-avatar_img">
-			{{getUsername user}}: {{text}}
-			<br>
+		<div class="media chat_message_row">
+		  <div class="media-body">
+		    <h6 class="media-heading my_heading">{{getUsername user}}</h6>
+		    	<div class="well well-sm chat_message-well my_message">
+						{{text}}
+						<br>
+					</div>
+		  </div>
+			<div class="media-right media-middle">
+	      <img class="media-object chat_message-avatar_img" src="/{{getAvatar user}}" alt="avatar picture">
+		  </div>
 		</div>
 	{{/if}}
 </template>
