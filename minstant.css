@@ -9,6 +9,23 @@
 	height:75px;
 }
 
+.chat_window {
+  background-color: #fff;
+}
+
 .chat_message-avatar_img {
   height:20px;
+}
+
+.chat_message-well {
+  border-radius: 30px;
+}
+
+.my_message {
+  background-color: #e3e7b3;
+}
+
+.other_message {
+  background-color: #0278ae;
+  color: #fff;
 }

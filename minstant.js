@@ -45,7 +45,7 @@ if (Meteor.isClient) {
       return Meteor.users.find();
     }
   })
- Template.available_user.helpers({
+  Template.available_user.helpers({
     getUsername:function(userId){
       user = Meteor.users.findOne({_id:userId});
       return user.profile.username;
@@ -60,33 +60,35 @@ if (Meteor.isClient) {
     }
   })
 
-
   Template.chat_page.helpers({
-    messages:function(){
+    messages: function() {
       var chat = Chats.findOne({_id:Session.get("chatId")});
       return chat.messages;
-    },
-    other_user:function(){
-      // We know the current user is Meteor.userId().
-      // The other must be one of user1Id or user2Id that is not Meteor.userId
-      var messages = messages();
-      if (Meteor.userId() == messages.user1Id) {
-        console.log('other_user', messages.user2Id);
-        return messages.user2Id;
-      }
-      console.log('other_user', messages.user1Id);
-      return messages.user1Id;
     }
   })
 
   Template.chat_message.helpers({
-    getUsername:function(userId){
+    getUsername: function(userId) {
       user = Meteor.users.findOne({_id:userId});
       return user.profile.username;
     },
-    getAvatar:function(userId){
+    getAvatar: function(userId) {
       user = Meteor.users.findOne({_id:userId});
       return user.profile.avatar;
+    },
+    isOtherUser: function(userId) {
+      var chat = Chats.findOne({_id:Session.get("chatId")});
+      var otherUser;
+      if (Meteor.userId() == userId) {
+        if (userId == chat.user1Id) {
+          otherUser = chat.user2Id;
+        } else {
+          otherUser = chat.user1Id;
+        }
+        return false;
+      }
+      otherUser = userId;
+      return true;
     }
   })
 

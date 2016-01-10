@@ -71,9 +71,9 @@
 	<h2>Type in the box below to send a message!</h2>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="well well-lg">
+			<div class="well well-lg chat_window">
 			{{#each messages}}
-			{{> chat_message}}
+				{{> chat_message}}
 			{{/each}}
 			</div>
 		</div>
@@ -90,9 +90,19 @@
 
 <!-- simple template that displays a message -->
 <template name="chat_message">
-	<img src="/{{getAvatar user}}" class="chat_message-avatar_img">
-	{{getUsername user}}: {{text}}
-	<br>
+	{{#if isOtherUser user}}
+		<div class="well well-sm chat_message-well other_message">
+			<img src="/{{getAvatar user}}" class="chat_message-avatar_img">
+			{{getUsername user}}: {{text}}
+			<br>
+		</div>
+ 	{{else}}
+		<div class="well well-sm chat_message-well my_message">
+			<img src="/{{getAvatar user}}" class="chat_message-avatar_img">
+			{{getUsername user}}: {{text}}
+			<br>
+		</div>
+	{{/if}}
 </template>
 
 
