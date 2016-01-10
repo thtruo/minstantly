@@ -8,7 +8,7 @@
 <!-- this is the main template used by iron:router to build the page -->
 <template name="ApplicationLayout">
 	{{> yield "header"}}
-	
+
 	<div class="container">
 	{{> yield "main"}}
 	</div>
@@ -49,10 +49,10 @@
 <template name="available_user">
 	<div class="col-md-2">
 		<div class="user_avatar">
-			{{#if isMyUser _id}} 
+			{{#if isMyUser _id}}
 			<div class="bg-success">{{getUsername _id}} (YOU)
 				<br/>
-				<img src="{{profile.avatar}}" class="avatar_img">			
+				<img src="{{profile.avatar}}" class="avatar_img">
 			</div>
 			{{else}}
 			<a href="/chat/{{_id}}">
@@ -75,7 +75,7 @@
 			{{#each messages}}
 			{{> chat_message}}
 			{{/each}}
-			</div>	
+			</div>
 		</div>
 	</div>
     <div class="row">
@@ -90,7 +90,8 @@
 
 <!-- simple template that displays a message -->
 <template name="chat_message">
-	someone said: {{text}}
+	<img src="/{{getAvatar user}}" class="chat_message-avatar_img">
+	{{getUsername user}}: {{text}}
 	<br>
 </template>
 
