@@ -1,10 +1,15 @@
 /* CSS declarations go here */
-.minstant_brand {
-  font-size: 24px;
+
+.navbar-default {
+  background-color: #fff;
 }
 
 .navbar-header {
   font-family: "Lobster Two", cursive;
+}
+
+.minstant_brand {
+  font-size: 24px;
 }
 
 .user_avatar{
