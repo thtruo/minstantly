@@ -18,9 +18,6 @@ Meteor.methods({
 
       // put the messages array onto the chat object
       chat.messages = msgs;
-      // console.log("  chat.messages after:"); console.log(chat.messages);
-      // console.log("  chat obj:"); console.log(chat);
-      // console.log("  ----recently added: ", chat.messages[chat.messages.length - 1]);
 
       // update the chat object in the database.
       Chats.update({ _id: chat._id }, chat, function(err) {
