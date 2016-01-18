@@ -20,7 +20,13 @@ Remove the insecure package from the application and implement a Meteor method t
 
 ### Task 3: Implement data reading security
 
-Remove the autopublish package from the application and implement publish and subscribe for Chats. Users should only be able to retrieve chats that have their user id in either the user1Id field or the user2Id field. Test by logging in as different users and checking what you can see
+Remove the autopublish package from the application and implement publish and subscribe for Chats. Users should only be able to retrieve chats that have their user id in either the user1Id field or the user2Id field. Test by logging in as different users and checking what you can see.
+
+#### Lessons Learned
+- Remember to publish the `Meteor.users` collection or else the homepage does not list all the **Minstant** users.
+- Sometimes when refreshing a chat page between two users, both will end up in a new chat session. To fix this, wait for the subscription to be ready at the route before checking for any preexisting chat sessions. 
+- An extension to the point above, I ran into a problem where inserting a new chat into the `Chats` collection failed. This is because no `Chats.allow`  was not defined for `insert` on the server-side. Remember to add this in for currently logged-in users in **Minstant**.
+- To ensure users only retrieve chats with their userId in either `user1Id` or `user2Id`, add an extra condition in the `/chat/:_id` route to bring non-users back to the root.
 
 ### Challenge: Implement emoticons
 
