@@ -3,7 +3,7 @@ Chats = new Mongo.Collection("chats");
 if (Meteor.isClient) {
 
   Meteor.subscribe("minstantUsers");
-  Meteor.subscribe("chats");
+  // Meteor.subscribe("chats");
 
   // set up the main template the the router will use to build pages
   Router.configure({
@@ -18,27 +18,47 @@ if (Meteor.isClient) {
 
   // specify a route that allows the current user to chat to another users
   Router.route('/chat/:_id', function () {
-    // the user they want to chat to has id equal to
-    // the id sent in after /chat/...
-    var otherUserId = this.params._id;
-    // find a chat that has two users that match current user id
-    // and the requested user id
-    var filter = {$or:[
-                {user1Id:Meteor.userId(), user2Id:otherUserId},
-                {user2Id:Meteor.userId(), user1Id:otherUserId}
-                ]};
-    var chat = Chats.findOne(filter);
-    if (!chat){// no chat matching the filter - need to insert a new one
-      chatId = Chats.insert({user1Id:Meteor.userId(), user2Id:otherUserId});
+    this.wait(Meteor.subscribe("chats"));
+
+    if (this.ready()) {
+      var otherUserId = this.params._id;
+
+      var filter = {$or:[
+                  {user1Id:Meteor.userId(), user2Id:otherUserId},
+                  {user2Id:Meteor.userId(), user1Id:otherUserId}
+                  ]};
+      var chat = Chats.findOne(filter);
+      var chatId;
+
+      if (!chat) {
+        console.log("Couldn't find chat with", Meteor.userId(), "and", otherUserId, "...");
+        chatId = Chats.insert({
+          user1Id:Meteor.userId(), user2Id:otherUserId
+        }, function (err, id) {
+          if (err) {
+            console.log("Error on inserting new chat");
+          } else{
+            console.log("Success on inserting new chat");
+          }
+        });
+      } else {
+        console.log("Found chat with", Meteor.userId(), "and", otherUserId, "!");
+        chatId = chat._id;
+      }
+      console.log("Got a chat and chatId...");
+      if (chatId) {
+        Session.set("chatId", chatId);
+        console.log("Setting chatId session");
+        console.log("    chatId session", Session.get("chatId"));
+      }
+      console.log("Ready to render...");
+      this.render("navbar", {to:"header"});
+      this.render("chat_page", {to:"main"});
+    } else {
+      console.log("Loading...");
+      this.render("loading");
     }
-    else {// there is a chat going already - use that.
-      chatId = chat._id;
-    }
-    if (chatId){// looking good, save the id to the session
-      Session.set("chatId",chatId);
-    }
-    this.render("navbar", {to:"header"});
-    this.render("chat_page", {to:"main"});
+
   });
 
   ///
@@ -122,6 +142,14 @@ if (Meteor.isClient) {
 // and the password test123
 
 if (Meteor.isServer) {
+
+  Chats.allow({
+    insert: function(userId, chat) {
+      // user must be logged in and chat must be owned by the user
+      return userId && (userId === chat.user1Id || userId === chat.user2Id);
+    }
+  });
+
   Meteor.startup(function () {
     if (!Meteor.users.findOne()){
       for (var i=1;i<9;i++){
