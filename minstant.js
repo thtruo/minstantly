@@ -1,6 +1,10 @@
 Chats = new Mongo.Collection("chats");
 
 if (Meteor.isClient) {
+
+  Meteor.subscribe("minstantUsers");
+  Meteor.subscribe("chats");
+
   // set up the main template the the router will use to build pages
   Router.configure({
     layoutTemplate: 'ApplicationLayout'
@@ -129,4 +133,20 @@ if (Meteor.isServer) {
       }
     }
   });
+
+  Meteor.publish("minstantUsers", function() {
+    console.log("In minstantUsers publish");
+    return Meteor.users.find({});
+  })
+
+  Meteor.publish("chats", function() {
+    console.log("In chats publish");
+    return Chats.find({});
+    // return Chats.find({
+    //   $or: [
+    //     { user1Id: this.userId }, { user2Id: this.userId }
+    //   ]
+    // });
+  })
+
 }
