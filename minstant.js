@@ -3,12 +3,12 @@ Chats = new Mongo.Collection("chats");
 if (Meteor.isClient) {
 
   Meteor.subscribe("minstantUsers");
-  // Meteor.subscribe("chats");
 
   // set up the main template the the router will use to build pages
   Router.configure({
     layoutTemplate: 'ApplicationLayout'
   });
+
   // specify the top level route, the page users see when they arrive at the site
   Router.route('/', function () {
     console.log("rendering root /");
@@ -18,6 +18,12 @@ if (Meteor.isClient) {
 
   // specify a route that allows the current user to chat to another users
   Router.route('/chat/:_id', function () {
+
+    // Ensure users cannot see chats that they are not part of
+    if (!Meteor.userId()) {
+      this.redirect("/");
+    }
+
     this.wait(Meteor.subscribe("chats"));
 
     if (this.ready()) {
@@ -56,7 +62,8 @@ if (Meteor.isClient) {
       this.render("chat_page", {to:"main"});
     } else {
       console.log("Loading...");
-      this.render("loading");
+      this.render("navbar", {to:"header"});
+      this.render("loading", {to:"main"});
     }
 
   });
@@ -170,11 +177,6 @@ if (Meteor.isServer) {
   Meteor.publish("chats", function() {
     console.log("In chats publish");
     return Chats.find({});
-    // return Chats.find({
-    //   $or: [
-    //     { user1Id: this.userId }, { user2Id: this.userId }
-    //   ]
-    // });
   })
 
 }
