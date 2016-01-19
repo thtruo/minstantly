@@ -32,4 +32,5 @@ Remove the autopublish package from the application and implement publish and su
 
 Can you implement emoticon functionality which allows the user to insert graphical emoticons into their message? Emoticons are small icons such as smiley faces which are typical of this kind of application.
 
-
+#### Lessons Learned
+Use the [mattimo:emoticons](https://atmospherejs.com/mattimo/emoticons) package.
