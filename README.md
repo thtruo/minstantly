@@ -1,12 +1,10 @@
-# Minstant 
+# Minstantly 
 
 This is a project inspired by Coursera's [Web Application Development with Javascript and MongoDB](https://www.coursera.org/learn/web-application-development/home/welcome) course. 
 
-## What is Minstant?
+## What is Minstantly?
 
-**Minstant** is an instant messaging app built with [Meteor](https://www.meteor.com) and Coursera's starter code. 
-
-## [TODO] Modify and clean up wording for the tasks that follow
+**Minstantly** is an instant messaging app built with [Meteor](https://www.meteor.com) and Coursera's starter code. While it satisfies the requirements for Coursera, I made sweeping modifications to how the app feels and looks. :)
 
 ### Task 1: Improve the look and feel
 
@@ -23,9 +21,9 @@ Remove the insecure package from the application and implement a Meteor method t
 Remove the autopublish package from the application and implement publish and subscribe for Chats. Users should only be able to retrieve chats that have their user id in either the user1Id field or the user2Id field. Test by logging in as different users and checking what you can see.
 
 #### Lessons Learned
-- Remember to publish the `Meteor.users` collection or else the homepage does not list all the **Minstant** users.
+- Remember to publish the `Meteor.users` collection or else the homepage does not list all the **Minstantly** users.
 - Sometimes when refreshing a chat page between two users, both will end up in a new chat session. To fix this, wait for the subscription to be ready at the route before checking for any preexisting chat sessions. 
-- An extension to the point above, I ran into a problem where inserting a new chat into the `Chats` collection failed. This is because no `Chats.allow`  was not defined for `insert` on the server-side. Remember to add this in for currently logged-in users in **Minstant**.
+- An extension to the point above, I ran into a problem where inserting a new chat into the `Chats` collection failed. This is because no `Chats.allow`  was not defined for `insert` on the server-side. Remember to add this in for currently logged-in users in **Minstantly**.
 - To ensure users only retrieve chats with their userId in either `user1Id` or `user2Id`, add an extra condition in the `/chat/:_id` route to bring non-users back to the root.
 
 ### Challenge: Implement emoticons
@@ -53,3 +51,10 @@ When creating the chat page, I wanted to correspond the height of the chat windo
         }
       });
     }
+
+### Deploying
+
+As a last step, I added [SSL](http://guide.meteor.com/security.html#ssl) for security purposes. I opted to do a [basic deployment](http://guide.meteor.com/deployment.html#free-hosting) on `meteor.com` by running the command 
+
+    meteor add force-ssl # for enabling SSL security
+    meteor deploy minstantly.meteor.com
