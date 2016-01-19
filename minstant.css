@@ -8,21 +8,28 @@
   font-family: "Lobster Two", cursive;
 }
 
-.minstant_brand {
-  font-size: 24px;
+#minstant_brand {
+  font-size: 36px;
+  color: #118DF0;
 }
 
 .user_avatar{
 	min-height:100px;
 	text-align: center;
-
 }
+
+.user_list-heading {
+  text-align: center;
+  font-family: "Lobster Two", cursive;
+}
+
 .avatar_img{
 	height:75px;
 }
 
 .chat_page-heading {
   text-align: center;
+  font-family: "Lobster Two", cursive;
 }
 
 .chat_page-chat_window {
