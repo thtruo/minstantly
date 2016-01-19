@@ -34,3 +34,5 @@ Can you implement emoticon functionality which allows the user to insert graphic
 
 #### Lessons Learned
 Use the [mattimo:emoticons](https://atmospherejs.com/mattimo/emoticons) package.
+
+Refactored the application into a hierarchical structure.

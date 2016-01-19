@@ -1,0 +1,13 @@
+<!-- this is the main template used by iron:router to build the page -->
+<template name="ApplicationLayout">
+	<head>
+	  <title>Minstant</title>
+	  <link href='https://fonts.googleapis.com/css?family=Lobster+Two:700' rel='stylesheet' type='text/css'>
+	</head>
+
+	{{> yield "header"}}
+
+	<div class="container">
+	{{> yield "main"}}
+	</div>
+</template>
