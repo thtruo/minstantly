@@ -46,12 +46,11 @@
   background-color: #f4f7f7;
 }
 .other_message {
-  background-color: #0278ae;
+  background-color: #118DF0;
   color: #fff;
 }
 
 .chat_message_row {
-  /*width: 90%;*/
   width: auto;
 }
 
