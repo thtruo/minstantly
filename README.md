@@ -36,3 +36,20 @@ Can you implement emoticon functionality which allows the user to insert graphic
 Use the [mattimo:emoticons](https://atmospherejs.com/mattimo/emoticons) package.
 
 Refactored the application into a hierarchical structure.
+
+### General Learnings
+When creating the chat page, I wanted to correspond the height of the chat window to the viewport height `vh`. While I was able to keep all the content within the height of the window, a problem I encountered was being able to scroll new `div`s automatically when a user enters a new message. My solution follows this stackoverflow [approach](http://stackoverflow.com/questions/31436289/how-do-i-scroll-to-the-bottom-of-a-div-as-data-is-added-in-meteor). Specifically, I computed the different in offsets between the first and last message and then make the chat window scroll to that position.
+
+    Template.chat_page.rendered = function() {
+      $('.js-send-chat').on('submit', function() {
+        var $firstMessageOffset = $(".chat_message_row:first").offset();
+        if ($firstMessageOffset) {
+          var scrollOffset = $(".chat_message_row:last").offset().top -
+                             $firstMessageOffset.top;
+          $(".chat_page-chat_window").animate({ scrollTop: scrollOffset }, '1000');
+        }
+        else { // no message so no need to scroll
+          return;
+        }
+      });
+    }
