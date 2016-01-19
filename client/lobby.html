@@ -18,15 +18,22 @@
   <div class="col-md-2">
     <div class="user_avatar">
       {{#if isMyUser _id}}
-      <div class="bg-success">{{getUsername _id}} (YOU)
-        <br/>
-        <img src="{{profile.avatar}}" class="avatar_img">
+      <div class="thumbnail">
+        <img src="/{{profile.avatar}}" class="avatar_img" alt="Avatar image">
+        <div class="caption bg-success">
+          <h3>{{getUsername _id}} (YOU)</h3>
+          <br/>
+        </div>
       </div>
       {{else}}
       <a href="/chat/{{_id}}">
-        {{getUsername _id}}
-        <br/>
-        <img src="{{profile.avatar}}" class="avatar_img">
+        <div class="thumbnail">
+          <img src="/{{profile.avatar}}" class="avatar_img" alt="Avatar image">
+          <div class="caption">
+            <h3>{{getUsername _id}}</h3>
+            <br/>
+          </div>
+        </div>
       </a>
       {{/if}}
     </div>
