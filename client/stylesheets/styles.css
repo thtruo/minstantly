@@ -2,10 +2,16 @@
 
 .navbar-default {
   background-color: #fff;
+  margin-bottom: 10px;
 }
 
 .navbar-header {
   font-family: "Lobster Two", cursive;
+}
+
+.collapsed-menu-button {
+  margin-top: 21px;
+  margin-right: 15px;
 }
 
 #minstant_brand {
@@ -54,11 +60,13 @@
 .chat_page-heading {
   text-align: center;
   font-family: "Lobster Two", cursive;
+  margin-top: 10px;
 }
 
 .chat_page-chat_window {
   background-color: #fff;
-  height: 100vh;
+  min-height: 300px;
+  height: 70vh;
   overflow: auto;
 }
 
@@ -102,7 +110,7 @@
 }
 
 .chat_page-typer {
-  margin-top: -27px;
+  margin-top: 0px;
 }
 
 .loading-message {
