@@ -33,7 +33,7 @@ Router.route('/chat/:_id', function () {
     var chatId;
 
     if (!chat) {
-      chatId = Chats.insert({user1Id:Meteor.userId(), user2Id:otherUserId});
+      chatId = Chats.insert({user1Id: Meteor.userId(), user2Id: otherUserId});
     } else {
       chatId = chat._id;
     }
@@ -42,11 +42,11 @@ Router.route('/chat/:_id', function () {
       Session.set("chatId", chatId);
     }
 
-    this.render("navbar", {to:"header"});
-    this.render("chat_page", {to:"main"});
+    this.render("navbar", {to: "header"});
+    this.render("chat_page", {to: "main"});
   } else {
-    this.render("navbar", {to:"header"});
-    this.render("loading", {to:"main"});
+    this.render("navbar", {to: "header"});
+    this.render("loading", {to: "main"});
   }
 });
 
@@ -60,7 +60,7 @@ Template.available_user_list.helpers({
 })
 Template.available_user.helpers({
   getUsername:function(userId){
-    user = Meteor.users.findOne({_id:userId});
+    user = Meteor.users.findOne({_id: userId});
     return user.profile.username;
   },
   isMyUser:function(userId){
@@ -72,6 +72,19 @@ Template.available_user.helpers({
     }
   }
 })
+
+Template.chat_page.rendered = function() {
+  $('.js-send-chat').on('submit', function() {
+    var $firstMessageOffset = $(".chat_message_row:first").offset();
+    if ($firstMessageOffset) {
+      var scrollOffset = $(".chat_message_row:last").offset().top -
+                         $firstMessageOffset.top;
+      $(".chat_page-chat_window").animate({ scrollTop: scrollOffset }, '1000');
+    } else { // no message so no need to scroll
+      return;
+    }
+  });
+}
 
 Template.chat_page.helpers({
   messages: function() {
@@ -122,7 +135,7 @@ Template.chat_page.events({
     // reset the form
     event.target.chat.value = "";
   }
- })
+})
 
 Template.loading.rendered = function () {
   var message = '<p class="loading-message">Ahoy!</p>';
