@@ -11,11 +11,25 @@
 #minstant_brand {
   font-size: 36px;
   color: #118DF0;
+  margin-bottom: 25px;
+}
+
+#login-dropdown-list {
+  margin-top: 10px;
 }
 
 .user_avatar{
-	min-height:100px;
+  margin-top: -1px;
 	text-align: center;
+}
+
+.user_avatar .media-heading {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.user_avatar .bg-success {
+  background-color: #d8fff1;
 }
 
 .user_list-heading {
@@ -23,8 +37,18 @@
   font-family: "Lobster Two", cursive;
 }
 
-.avatar_img{
-	height:75px;
+.list-group-item {
+  padding-top: 20px;
+}
+
+.avatar_img {
+  object-fit: cover;
+  border-width: thin;
+  border-color: #118DF0;
+  border-radius: 75px;
+  border-style: solid;
+  height: 75px;
+  width: 75px;
 }
 
 .chat_page-heading {
@@ -34,6 +58,8 @@
 
 .chat_page-chat_window {
   background-color: #fff;
+  height: 100vh;
+  overflow: auto;
 }
 
 .chat_message-avatar_img {

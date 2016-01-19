@@ -125,7 +125,7 @@ Template.chat_page.events({
  })
 
 Template.loading.rendered = function () {
-  var message = '<p class="loading-message">Loading Message</p>';
+  var message = '<p class="loading-message">Ahoy!</p>';
   var spinner = '<div class="sk-spinner sk-spinner-rotating-plane"></div>';
   if (!Session.get('loadingSplash')) {
     this.loading = window.pleaseWait({
