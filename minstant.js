@@ -6,7 +6,8 @@ if (Meteor.isClient) {
 
   // set up the main template the the router will use to build pages
   Router.configure({
-    layoutTemplate: 'ApplicationLayout'
+    layoutTemplate: 'ApplicationLayout',
+    loadingTemplate: 'loading'
   });
 
   // specify the top level route, the page users see when they arrive at the site
@@ -141,6 +142,26 @@ if (Meteor.isClient) {
       event.target.chat.value = "";
     }
    })
+
+  Template.loading.rendered = function () {
+    var message = '<p class="loading-message">Loading Message</p>';
+    var spinner = '<div class="sk-spinner sk-spinner-rotating-plane"></div>';
+    if (!Session.get('loadingSplash')) {
+      this.loading = window.pleaseWait({
+        logo: '/meteor-logo.png',
+        backgroundColor: '#fff',
+        loadingHtml: message + spinner
+      });
+      Session.set('loadingSplash', false); // show loading splash once
+    }
+  };
+
+  Template.loading.destroyed = function () {
+    if (this.loading) {
+      this.loading.finish();
+    }
+  };
+
 }
 
 

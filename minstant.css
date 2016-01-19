@@ -78,3 +78,14 @@
 .chat_page-typer {
   margin-top: -27px;
 }
+
+.loading-message {
+  color: #118DF0;
+  font-size: 25px;
+  font-weight: 300;
+  font-family: sans-serif;
+}
+
+.sk-spinner-rotating-plane.sk-spinner {
+  background-color: #fff;
+}
