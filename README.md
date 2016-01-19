@@ -4,7 +4,7 @@ This is a project inspired by Coursera's [Web Application Development with Javas
 
 ## What is Minstantly?
 
-**Minstantly** is an instant messaging app built with [Meteor](https://www.meteor.com) and Coursera's starter code. While it satisfies the requirements for Coursera, I made sweeping modifications to how the app feels and looks. :)
+[**Minstantly**](https://minstantly.meteor.com) is an instant messaging app built with [Meteor](https://www.meteor.com) and Coursera's starter code. While it satisfies the requirements for Coursera, I made sweeping modifications to how the app feels and looks. :)
 
 ### Task 1: Improve the look and feel
 
